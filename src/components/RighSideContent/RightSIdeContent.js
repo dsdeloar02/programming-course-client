@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import SingleCourse from '../singleCourse/SingleCourse'
 
-const RightSIdeContent = ({course}) => {
+const RightSIdeContent = () => {
+//   const allCourse = useLoaderData();
+  const [categories, setCategories] = useState([]);
 
-    return (
-        <div className='border p-5 rounded-md'>
-            <img src={course.thumbnail_url} alt="" className='h-[250px]' />
-            <h1 className='font-bold py-3'>{course.title}</h1>
-            <button className='py-2 px-5 bg-slate-900 text-white' >View Details</button>
-        </div>
-    );
-}
+  useEffect(() => {
+    fetch("http://localhost:5000/categories")
+      .then((res) => res.json())
+      .then((data) => setCategories(data));
+  }, []);
+
+  console.log(categories)
+
+//   console.log(course.category_id);
+
+  return (
+      <div className='grid grid-cols-3 gap-4 my-5'>
+        {
+            categories.map(category => <SingleCourse
+            category={category}
+            ></SingleCourse> )
+        }
+      </div>
+  );
+};
 
 export default RightSIdeContent;

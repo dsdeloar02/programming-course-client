@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import LeftSideNav from '../LeftSideNav/LeftSideNav';
 import RightSIdeContent from '../RighSideContent/RightSIdeContent';
 
 const Course = () => {
-    const courses = useLoaderData();
+    // const courses = useLoaderData();
+    const [courses, setCourses] = useState([]);
+
+    useEffect( () =>{
+        fetch('http://localhost:5000/courses')
+        .then( res => res.json())
+        .then(data => setCourses(data));
+    }, [])
     console.log(courses)
     return (
         <div className='container mx-auto'>
@@ -13,13 +20,8 @@ const Course = () => {
                     <LeftSideNav></LeftSideNav>
                 </div>
                 <div className='col-span-3'>
-                   <div className='grid grid-cols-3 gap-4 my-5'>
-                    {
-                        courses.map(course => <RightSIdeContent 
-                            key={course.id}
-                            course = {course}
-                            ></RightSIdeContent>)
-                    }
+                   <div>
+                    <RightSIdeContent></RightSIdeContent>
                    </div>
                 </div>
             </div>
