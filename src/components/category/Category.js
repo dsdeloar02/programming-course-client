@@ -23,7 +23,7 @@ const Category = () => {
                         </div>
                         <p>{allCourse.details}</p>
                         <button className="bg-gray-800 py-3 px-5 text-white mt-3" >
-                            <Link to={`/cart/${category_id}`} >Buy Now {allCourse.category_id} </Link>
+                            <Link to={`/cart/${category_id}`} >Get premium access </Link>
                         </button>
                    </div>
                 </div>

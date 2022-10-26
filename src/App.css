@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+
+.dark-theme{
+  background-color: rgb(34, 34, 37);
+  --main-heading:#5f99be;
+  --para-clr: #fff;
+  --btn-bg-color:#fff;
+  --btn-text-clr:#000;
+}
+.light-theme{
+  background-color: #ffff;
+  --main-heading:#5f99be;
+  --para-clr: rgb(36, 36, 36);
+}
+
+h1,h2,h3,h4,h5{
+  color: var(--para-clr);
+}
+p{
+  color: var(--para-clr);
+}
+li{
+  color: var(--para-clr);
+}
+a{
+  color: var(--para-clr);
+}
+/* button{
+  color: var(--btn-text-clr);
+  background: var(--btn-bg-color);
+} */

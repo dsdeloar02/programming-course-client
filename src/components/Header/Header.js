@@ -1,14 +1,29 @@
 import React from 'react';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import {BsFillBrightnessHighFill }  from "react-icons/bs";
+import { CiDark } from "react-icons/ci";
+import { useEffect } from 'react';
 
 const Header = () => {
     const [background, setBackground] = useState(false)
-    // const handleBgChange = () => {
-    //     setBackground()
-    // }
+    const [theme, setTheme] = useState('light-theme');
+    const handleBgChange = () => {
+        if(theme === "dark-theme" ){
+            // setBackground(true)
+            setTheme('light-theme')
+        }else{
+            // setBackground(false)
+            setTheme('dark-theme')
+        }
+    }
+
+    useEffect(() => {
+        document.body.className = theme;
+    }, [theme])
+
     return (
-        <div className='bg-gray-100 ' >
+        <div className=' ' >
             <div className="container mx-auto md:flex justify-between py-6">
                 <div className='flex items-center text-slate-600 w-[300px]'>
                     <h1>Programming Tech</h1>
@@ -24,11 +39,11 @@ const Header = () => {
                         <NavLink>Review</NavLink>
                     </li>
                     <li className='mx-2 py-2 px-4 hover:bg-[#6419E6]'>
-                        <NavLink>Log In</NavLink>
+                        <NavLink to='/login' >Log In</NavLink>
                     </li>
-                    <button onClick={() => setBackground(!background)} >
+                    <button onClick={() => handleBgChange(setBackground(!background))} >
                        {
-                            !background ? <p>BgChng</p> : <p>setBd</p>
+                            !background ? <CiDark className='text-black w-6 h-5' /> : <BsFillBrightnessHighFill className='text-white w-6 h-5' />
                        } 
                     </button>
                 </ul>
