@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../context/AuthContext/AuthProvider';
 
 const Register = () => {
     const [error, setError] = useState('');
     const [accepted, setAccepted] = useState(false);
-    const { createUser, updateUserProfile, logOut } = useContext(AuthContext)
+    const { createUser, updateUserProfile, logOut, handleEmailVarification } = useContext(AuthContext)
 
 
     const handleSubmit = (event) => {
@@ -23,8 +24,10 @@ const Register = () => {
             const user = result.user;
             form.reset();
             handleUpdateProfile(name, photoURL);
+            verifyEmail();
             logOut();
             console.log(user)
+            toast.success('Go to Check email')
         })
         .catch( e => {
             console.error(e)
@@ -32,6 +35,11 @@ const Register = () => {
         })
     };
 
+    const verifyEmail = () => {
+        handleEmailVarification()
+        .then(()=>{})
+        .catch(err => console.error(err))
+    }
 
     const handleUpdateProfile = (name, photoURL) => {
         const profile = {

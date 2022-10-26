@@ -8,6 +8,8 @@ import { AuthContext } from '../../context/AuthContext/AuthProvider';
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [isShown, setIsShown] = useState(false);
+    console.log(user)
     const [background, setBackground] = useState(false)
     const [theme, setTheme] = useState('light-theme');
     const handleBgChange = () => {
@@ -23,6 +25,15 @@ const Header = () => {
     useEffect(() => {
         document.body.className = theme;
     }, [theme])
+
+
+    const handleLogOut = () =>{
+        logOut()
+        .then(() => {})
+        .catch(err => console.log(err))
+    }
+
+    console.log(user?.displayName)
 
     return (
         <div className=' ' >
@@ -40,9 +51,29 @@ const Header = () => {
                     <li className='mx-2 py-2 px-4 hover:bg-[#6419E6]'>
                         <NavLink>Review</NavLink>
                     </li>
-                    <li className='mx-2 py-2 px-4 hover:bg-[#6419E6]'>
+                    <li className='mx-2 '>
                        {
-                        user? <p>asi</p> :  <NavLink to='/login' >Log In</NavLink>
+                        user? 
+                        <div className='flex relative'>
+                            <button className='px-3 mr-2 bg-black text-white' onClick={handleLogOut} >Log Out </button>
+                            <button 
+                                onMouseEnter={() => setIsShown(true)}
+                                onMouseLeave={() => setIsShown(false)}
+                            >
+                                <img src={user?.photoURL} alt="" className='h-10 w-10 rounded-full' />
+                            </button>
+                            <div className='absolute top-12 right-0'>
+                                {
+                                    isShown && 
+                                    <div>
+                                        <p className='bg-red-500 rounded-lg py-1 px-2 ' >{user?.displayName}</p>                                        
+                                    </div>
+                                }
+                            </div>
+                            
+                        </div>
+                        
+                        :  <NavLink to='/login' className='bg-[#6419E6] py-2 px-4' >Log In</NavLink>
                        }
                     </li>
                     <button onClick={() => handleBgChange(setBackground(!background))} >
@@ -50,6 +81,8 @@ const Header = () => {
                             !background ? <CiDark className='text-black w-6 h-5' /> : <BsFillBrightnessHighFill className='text-white w-6 h-5' />
                        } 
                     </button>
+
+                    
                 </ul>
             </div>
         </div>

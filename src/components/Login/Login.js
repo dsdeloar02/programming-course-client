@@ -1,11 +1,13 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext/AuthProvider";
 
 const Login = () => {
-  const [error, setErrot] = useState('');
-    const { signIn } = useContext(AuthContext)
-
+  const [error, setError] = useState('');
+  const { signIn, setLoading } = useContext(AuthContext)
+  const navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || '/';
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -17,16 +19,37 @@ const Login = () => {
       const user = result.user;
       console.log(user)
       form.reset()
+      setError('')
+      if(user.emailVerified){
+        navigate(from, {replace: true});
+      }
     })
     .catch(error =>{
       console.error(error)
-      setErrot(error.message)
+      setError(error.message)
+    })
+    .finally(()=>{
+      setLoading(false)
     })
   };
 
 
   return (
-    <div className="hero min-h-screen">
+    <div className="hero my-10 ">
+
+
+{/* <button
+        onMouseEnter={() => setIsShown(true)}
+        onMouseLeave={() => setIsShown(false)}>
+        Hover over me!
+      </button>
+      {isShown && (
+        <div>
+          I'll appear when you hover over the button.
+        </div>
+      )} */}
+
+
       <div className="flex justify-between">
         <div className="card p-10 mx-auto w-full  max-w-sm shadow-2xl">
           <h1 className="font-bold text-2xl text-center">Log in </h1>
@@ -60,6 +83,7 @@ const Login = () => {
                 Login
               </button>
             </div>
+            <p className="my-2" >{error}</p>
             <div className="flex justify-between mb-3">
               <label className="label">
                 <Link to="/" className="">
