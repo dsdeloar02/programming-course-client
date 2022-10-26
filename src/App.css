@@ -56,12 +56,19 @@ h1,h2,h3,h4,h5{
 p{
   color: var(--para-clr);
 }
-li{
+ li{
   color: var(--para-clr);
 }
+small{
+  color: var(--para-clr);
+}
+label{
+  color: var(--para-clr);
+}
+/*
 a{
   color: var(--para-clr);
-}
+} */
 /* button{
   color: var(--btn-text-clr);
   background: var(--btn-bg-color);

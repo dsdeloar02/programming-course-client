@@ -22,7 +22,7 @@ const Category = () => {
                             <p className='font-bold'> Total View : {allCourse.total_view}</p>
                         </div>
                         <p>{allCourse.details}</p>
-                        <button className="bg-gray-800 py-3 px-5 text-white mt-3" >
+                        <button className="bg-red-500 py-3 px-5 text-white mt-3" >
                             <Link to={`/cart/${category_id}`} >Get premium access </Link>
                         </button>
                    </div>
