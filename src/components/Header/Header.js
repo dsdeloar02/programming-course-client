@@ -1,7 +1,12 @@
 import React from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Header = () => {
+    const [background, setBackground] = useState(false)
+    // const handleBgChange = () => {
+    //     setBackground()
+    // }
     return (
         <div className='bg-gray-100 ' >
             <div className="container mx-auto md:flex justify-between py-6">
@@ -21,6 +26,11 @@ const Header = () => {
                     <li className='mx-2 py-2 px-4 hover:bg-[#6419E6]'>
                         <NavLink>Log In</NavLink>
                     </li>
+                    <button onClick={() => setBackground(!background)} >
+                       {
+                            !background ? <p>BgChng</p> : <p>setBd</p>
+                       } 
+                    </button>
                 </ul>
             </div>
         </div>

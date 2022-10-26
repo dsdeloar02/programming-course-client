@@ -4,7 +4,9 @@ import LeftSideNav from '../LeftSideNav/LeftSideNav';
 
 const Category = () => {
     const allCourse = useLoaderData();
-    const cart = useLoaderData();
+    const {category_id} = allCourse;
+    
+    // const cart = useLoaderData();
     return (
         <div className='container mx-auto'>
             <div className='grid  grid-cols-4 gap-4'>
@@ -21,7 +23,7 @@ const Category = () => {
                         </div>
                         <p>{allCourse.details}</p>
                         <button className="bg-gray-800 py-3 px-5 text-white mt-3" >
-                            <Link to={`/cart/${cart.id}`} >Buy Now {allCourse.category_id} </Link>
+                            <Link to={`/cart/${category_id}`} >Buy Now {allCourse.category_id} </Link>
                         </button>
                    </div>
                 </div>
