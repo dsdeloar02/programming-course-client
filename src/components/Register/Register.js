@@ -1,12 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext/AuthProvider';
 
 const Register = () => {
-    const handleSubmit = () => {};
+    const [error, setError] = useState('');
+    const [accepted, setAccepted] = useState(false);
+    const { createUser, updateUserProfile, logOut } = useContext(AuthContext)
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const photoURL = form.photoURL.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(name, photoURL, email, password);
+
+        createUser(email, password)
+        .then(result => {
+            const user = result.user;
+            form.reset();
+            handleUpdateProfile(name, photoURL);
+            logOut();
+            console.log(user)
+        })
+        .catch( e => {
+            console.error(e)
+            setError(e.message);
+        })
+    };
+
+
+    const handleUpdateProfile = (name, photoURL) => {
+        const profile = {
+            displayName : name,
+            photoURL : photoURL,
+        }
+        updateUserProfile(profile)
+        .then(() => {})
+        .catch(err => console.error(err))
+    }
+
+
     return (
         <div className="hero my-6">
         <div className="flex justify-between">
-          <div className="card p-10 mx-auto w-full  max-w-sm shadow-2xl">
+          <div className="card p-10 mx-auto w-full  max-w-sm shadow-xl">
             <h1 className="font-bold text-2xl text-center my-3">Register </h1>
             <form onSubmit={handleSubmit} className="card-body ">
               <div className="form-control">
@@ -28,7 +69,7 @@ const Register = () => {
                 <input
                   type="text"
                   placeholder="Enter you Photo Url"
-                  name="photoUrl"
+                  name="photoURL"
                   className="input border w-full mt-2 px-3 py-2"
                   required
                 />
@@ -69,7 +110,7 @@ const Register = () => {
                   </Link>
                 </label>
                 <label className="label">
-                  <Link to="/register" className="">
+                  <Link to="/login" className="">
                     <small>Allready Registered ? Log in</small>
                   </Link>
                 </label>

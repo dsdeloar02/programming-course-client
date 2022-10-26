@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import {BsFillBrightnessHighFill }  from "react-icons/bs";
 import { CiDark } from "react-icons/ci";
 import { useEffect } from 'react';
+import { AuthContext } from '../../context/AuthContext/AuthProvider';
 
 const Header = () => {
+    const { user, logOut } = useContext(AuthContext);
     const [background, setBackground] = useState(false)
     const [theme, setTheme] = useState('light-theme');
     const handleBgChange = () => {
@@ -39,7 +41,9 @@ const Header = () => {
                         <NavLink>Review</NavLink>
                     </li>
                     <li className='mx-2 py-2 px-4 hover:bg-[#6419E6]'>
-                        <NavLink to='/login' >Log In</NavLink>
+                       {
+                        user? <p>asi</p> :  <NavLink to='/login' >Log In</NavLink>
+                       }
                     </li>
                     <button onClick={() => handleBgChange(setBackground(!background))} >
                        {
