@@ -1,8 +1,13 @@
 import React from 'react';
+import { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import Pdf from "react-to-pdf";
+import { AuthContext } from '../../context/AuthContext/AuthProvider';
+const ref = React.createRef();
 
 const Cart = () => {
-    const cartDetails = useLoaderData()
+    const cartDetails = useLoaderData();
+    const { user } = useContext(AuthContext);
     console.log(cartDetails)
     const {name, price, vat} = cartDetails;
     console.log(vat)
@@ -12,27 +17,35 @@ const Cart = () => {
     return (
         <div className='w-[800px] mx-auto my-10' >
             <h1 className='font-bold text-2xl my-3 text-center' >Course : {name}</h1>
-            <ul className='border p-9 rounded-md'>
+            <ul className='border p-9 rounded-md' ref={ref} >
                 <h2 className='mb-4'>Cart Total</h2>
                 <li className='flex justify-between py-4 px-3 border'>
-                    <p>Subtotal</p>
+                    <p>User Name :</p>
+                    <p>{user.displayName}</p>
+                </li>
+                <li className='flex justify-between py-4 px-3 border'>
+                    <p>Course Name :</p>
+                    <p>{name}</p>
+                </li>
+                <li className='flex justify-between py-4 px-3 border'>
+                    <p>Subtotal :</p>
                     <p>{parsePrice}</p>
                 </li>
                 <li className='flex justify-between py-4 px-3 border'>
-                    <p>Vat</p>
+                    <p>Vat :</p>
                     <p>{parseVat}</p>
                 </li>
                 <li className='flex justify-between py-4 px-3 border'>
-                    <p>Total</p>
+                    <p>Total :</p>
                     <p>{totalPrice}</p>
                 </li>
             </ul>
             <div className='flex justify-between'>
                 <button className='mt-4 py-3 px-5 bg-red-500 text-white' >Procced to Checkout</button>
-                {/* <PDFDownloadLink document={<PDFFile />} filename="FORM">
-      {({loading}) => (loading ? <button>Loading Document...</button> : <button>Download</button> )}
-      </PDFDownloadLink> */}
-                <button className='mt-4 py-3 px-5 bg-red-500 text-white' >Download Details</button>
+                
+                <Pdf targetRef={ref} filename="code-example.pdf">
+                    {({toPdf}) => <button onClick={toPdf} className='mt-4 py-3 px-5 bg-red-500 text-white' >Download Details</button> }
+                </Pdf>
             </div>
         </div>
     );

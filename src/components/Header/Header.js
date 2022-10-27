@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid'
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import {BsFillBrightnessHighFill }  from "react-icons/bs";
@@ -9,7 +10,7 @@ import { AuthContext } from '../../context/AuthContext/AuthProvider';
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
     const [isShown, setIsShown] = useState(false);
-    console.log(user)
+    const [open, setOpen] = useState(false)
     const [background, setBackground] = useState(false)
     const [theme, setTheme] = useState('light-theme');
     const handleBgChange = () => {
@@ -41,7 +42,17 @@ const Header = () => {
                 <div className='flex items-center text-slate-600 w-[300px]'>
                     <h1>Programming Tech</h1>
                 </div>
-                <ul className='md:flex md:justify-end md:items-center w-full'>
+
+                <div onClick={() =>setOpen(!open)} className="absolute right-4 top-6 cursor-pointer md:hidden" >
+                    {
+                        open ? <XMarkIcon className="h-8 w-8 text-white bg-black"/> :  <Bars3Icon className="h-8 w-8 text-white bg-black" /> 
+                    }           
+                </div>
+
+                <ul
+                   className={` py-5 md:py-0 md:flex md:justify-end md:items-center absolute w-full left-0 md:static  transition-all duration-500 ease-in ${open ? 'top-20' : 'top-[-500px]'}  `} 
+                 
+                 >
                     <li className='mx-2 py-2 px-4 hover:bg-[#6419E6]'>
                         <NavLink to='/' >Home</NavLink>
                     </li>
