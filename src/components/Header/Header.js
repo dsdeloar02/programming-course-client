@@ -53,7 +53,7 @@ const Header = () => {
                     </li>
                     <li className='mx-2 '>
                        {
-                        user? 
+                        user?.uid? 
                         <div className='flex relative'>
                             <button className='px-3 mr-2 bg-black text-white' onClick={handleLogOut} >Log Out </button>
                             <button 

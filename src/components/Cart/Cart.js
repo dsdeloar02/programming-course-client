@@ -26,8 +26,14 @@ const Cart = () => {
                     <p>Total</p>
                     <p>{totalPrice}</p>
                 </li>
-                <button className='mt-4 py-3 px-5 bg-red-500 text-white' >Procced to Checkout</button>
             </ul>
+            <div className='flex justify-between'>
+                <button className='mt-4 py-3 px-5 bg-red-500 text-white' >Procced to Checkout</button>
+                {/* <PDFDownloadLink document={<PDFFile />} filename="FORM">
+      {({loading}) => (loading ? <button>Loading Document...</button> : <button>Download</button> )}
+      </PDFDownloadLink> */}
+                <button className='mt-4 py-3 px-5 bg-red-500 text-white' >Download Details</button>
+            </div>
         </div>
     );
 }

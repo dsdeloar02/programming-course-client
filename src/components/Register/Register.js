@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../context/AuthContext/AuthProvider';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 
 const Register = () => {
     const [error, setError] = useState('');
-    const [accepted, setAccepted] = useState(false);
-    const { createUser, updateUserProfile, logOut, handleEmailVarification } = useContext(AuthContext)
+    // const [accepted, setAccepted] = useState(false);
+    const { createUser, updateUserProfile, setUser, logOut, handleEmailVarification,  googleProviderLogin,  githubProviderLogin  } = useContext(AuthContext);
+    const navigate = useNavigate();
 
 
     const handleSubmit = (event) => {
@@ -34,6 +36,37 @@ const Register = () => {
             setError(e.message);
         })
     };
+
+    const handleGoogleSignIn = () =>{
+      const googleprovider = new GoogleAuthProvider();
+      googleProviderLogin(googleprovider)
+      .then(result => {
+        const user = result.user;
+        console.log(user)
+        setError('')
+        navigate('/')
+      })
+      .catch(err => {
+        console.log('error :', error)
+        setError(err.message)
+      })
+    };
+  
+    const handleGithubSignIn = () =>{
+      const githubprovider = new GithubAuthProvider();
+      githubProviderLogin(githubprovider)
+      .then(result => {
+        const user = result.user;
+        setUser(user)
+        console.log(user)
+        setError('');
+        navigate('/')
+      })
+      .catch(err => {
+        console.log('error :', error)
+        setError(err.message)
+      })
+    }
 
     const verifyEmail = () => {
         handleEmailVarification()
@@ -127,10 +160,10 @@ const Register = () => {
                 <small>Or Sign In With</small>
               </p>
               <div className="my-3">
-                <button className="py-2 my-2 w-full bg-orange-400 text-white">
+                <button onClick={handleGoogleSignIn} className="py-2 my-2 w-full bg-orange-400 text-white">
                   Sign In with Gogle
                 </button>
-                <button className="py-2 w-full bg-blue-400 text-white">
+                <button onClick={handleGithubSignIn} className="py-2 w-full bg-blue-400 text-white">
                   Sign In with GitHub
                 </button>
               </div>

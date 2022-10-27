@@ -1,10 +1,12 @@
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext/AuthProvider";
 
 const Login = () => {
   const [error, setError] = useState('');
-  const { signIn, setLoading } = useContext(AuthContext)
+  const { signIn, googleProviderLogin, setLoading, githubProviderLogin } = useContext(AuthContext);
+  
   const navigate = useNavigate();
   let location = useLocation();
   let from = location.state?.from?.pathname || '/';
@@ -33,23 +35,40 @@ const Login = () => {
     })
   };
 
+  const handleGoogleSignIn = () =>{
+    const googleprovider = new GoogleAuthProvider();
+    googleProviderLogin(googleprovider)
+    .then(result => {
+      const user = result.user;
+      console.log(user)
+      setError('')
+      navigate(from, {replace: true});
+    })
+    .catch(err => {
+      console.log('error :', error)
+      setError(err.message)
+    })
+  };
+
+  const handleGithubSignIn = () =>{
+    const githubprovider = new GithubAuthProvider();
+    githubProviderLogin(githubprovider)
+    .then(result => {
+      const user = result.user;
+      // setUser(user)
+      console.log(user)
+      setError('');
+      navigate(from, {replace: true})
+    })
+    .catch(err => {
+      console.log('error :', error)
+      setError(err.message)
+    })
+  }
+
 
   return (
     <div className="hero my-10 ">
-
-
-{/* <button
-        onMouseEnter={() => setIsShown(true)}
-        onMouseLeave={() => setIsShown(false)}>
-        Hover over me!
-      </button>
-      {isShown && (
-        <div>
-          I'll appear when you hover over the button.
-        </div>
-      )} */}
-
-
       <div className="flex justify-between">
         <div className="card p-10 mx-auto w-full  max-w-sm shadow-2xl">
           <h1 className="font-bold text-2xl text-center">Log in </h1>
@@ -83,7 +102,7 @@ const Login = () => {
                 Login
               </button>
             </div>
-            <p className="my-2" >{error}</p>
+            <p><small  className="my-2 text-red-600" >{error}</small></p>
             <div className="flex justify-between mb-3">
               <label className="label">
                 <Link to="/" className="">
@@ -100,10 +119,10 @@ const Login = () => {
               <small>Or Sign In With</small>
             </p>
             <div className="my-3">
-              <button className="py-2 my-2 w-full bg-orange-400 text-white">
+              <button onClick={handleGoogleSignIn} className="py-2 my-2 w-full bg-orange-400 text-white">
                 Sign In with Gogle
               </button>
-              <button className="py-2 w-full bg-blue-400 text-white">
+              <button onClick={handleGithubSignIn} className="py-2 w-full bg-blue-400 text-white">
                 Sign In with GitHub
               </button>
             </div>
