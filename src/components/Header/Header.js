@@ -38,9 +38,9 @@ const Header = () => {
 
     return (
         <div className=' ' >
-            <div className="container mx-auto md:flex justify-between py-6">
+            <div className="container w-5/6 md:w-full mx-auto md:flex justify-between py-6">
                 <div className='flex items-center text-slate-600 w-[300px]'>
-                    <h1>Programming Tech</h1>
+                    <h1 className='font-bold text-2xl' >Programming Tech</h1>
                 </div>
 
                 <div onClick={() =>setOpen(!open)} className="absolute right-4 top-6 cursor-pointer md:hidden" >
@@ -60,7 +60,10 @@ const Header = () => {
                         <NavLink to='/course' >Course</NavLink>
                     </li>
                     <li className='mx-2 py-2 px-4 hover:bg-[#6419E6]'>
-                        <NavLink>Review</NavLink>
+                        <NavLink to='/blogs' >Blogs</NavLink>
+                    </li>
+                    <li className='mx-2 py-2 px-4 hover:bg-[#6419E6]'>
+                        <NavLink to='/faq' >FAq</NavLink>
                     </li>
                     <li className='mx-2 '>
                        {
@@ -71,7 +74,7 @@ const Header = () => {
                                 onMouseEnter={() => setIsShown(true)}
                                 onMouseLeave={() => setIsShown(false)}
                             >
-                                <img src={user?.photoURL} alt="" className='h-10 w-10 rounded-full' />
+                                <img src={user?.photoURL} alt="" className='h-10 w-10 mx-3 rounded-full' />
                             </button>
                             <div className='absolute top-12 right-0'>
                                 {

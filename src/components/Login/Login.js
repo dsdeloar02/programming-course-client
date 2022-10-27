@@ -68,9 +68,9 @@ const Login = () => {
 
 
   return (
-    <div className="hero my-10 ">
+    <div className="my-10 ">
       <div className="flex justify-between">
-        <div className="card p-10 mx-auto w-full  max-w-sm shadow-2xl">
+        <div className="mx-auto w-full  max-w-sm shadow-2xl">
           <h1 className="font-bold text-2xl text-center">Log in </h1>
           <form onSubmit={handleSubmit} className="card-body ">
             <div className="form-control">
@@ -81,7 +81,7 @@ const Login = () => {
                 type="email"
                 placeholder="email"
                 name="email"
-                className="input border w-full mt-2 px-3 py-2"
+                className="input input-bordered w-full max-w-xs"
                 required
               />
             </div>
@@ -93,7 +93,7 @@ const Login = () => {
                 type="password"
                 placeholder="password"
                 name="password"
-                className="input border w-full mt-2 px-3 py-2"
+                className="input input-bordered w-full max-w-xs"
                 required
               />
             </div>
