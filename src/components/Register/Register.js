@@ -135,7 +135,7 @@ const Register = () => {
                   type="password"
                   placeholder="password"
                   name="password"
-                  className="input border w-full mt-2 px-3 py-2"
+                  className="input input-bordered w-full max-w-xs"
                   required
                 />
               </div>

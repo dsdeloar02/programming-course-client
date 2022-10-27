@@ -15,9 +15,9 @@ const Cart = () => {
     const parseVat = parseInt(vat)
     const totalPrice = parsePrice + parseVat;
     return (
-        <div className='w-[800px] mx-auto my-10' >
+        <div className='w-5/6 md:w-[800px] mx-auto my-10' >
             <h1 className='font-bold text-2xl my-3 text-center' >Course : {name}</h1>
-            <ul className='border p-9 rounded-md' ref={ref} >
+            <ul className='border p-5 md:p-9 rounded-md' ref={ref} >
                 <h2 className='mb-4'>Cart Total</h2>
                 <li className='flex justify-between py-4 px-3 border'>
                     <p>User Name :</p>
@@ -40,7 +40,7 @@ const Cart = () => {
                     <p>{totalPrice}</p>
                 </li>
             </ul>
-            <div className='flex justify-between'>
+            <div className='flex flex-col md:flex-row justify-center md:justify-between'>
                 <button className='mt-4 py-3 px-5 bg-red-500 text-white' >Procced to Checkout</button>
                 
                 <Pdf targetRef={ref} filename="code-example.pdf">

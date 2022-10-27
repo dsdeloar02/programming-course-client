@@ -12,11 +12,11 @@ const LeftSideNav = () => {
     }, [])
     return (
         <div>
-            <h4>All Category: {categories.length}</h4>
-            <div className='categoryWrapper'>
+            <h4 className='text-2xl font-semibold text-center my-3' > Category List : </h4>
+            <div className='categoryWrapper flex flex-wrap'>
                 {
-                    categories.map(category => <p className='my-2 py-3 px-3 w-full bg-red-500 text-white' key={category.id}>
-                        <Link  to={`/category/${category.id}`}>{category.name}</Link>
+                    categories.map(category => <p className='my-2 mx-2 py-3 px-3 w-full bg-red-500 inline-block text-white hover:bg-red-700' key={category.id}>
+                        <Link className='inline-block'  to={`/category/${category.id}`}>{category.name}</Link>
                     </p>)
                 }
             </div>

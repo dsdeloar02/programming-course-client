@@ -17,7 +17,7 @@ const RightSIdeContent = () => {
 //   console.log(course.category_id);
 
   return (
-      <div className='grid grid-cols-3 gap-4 my-5'>
+      <div className='flex flex-wrap justify-center md:justify-between my-5'>
         {
             categories.map(category => <SingleCourse
             category={category}

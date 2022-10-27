@@ -15,14 +15,12 @@ const Course = () => {
     console.log(courses)
     return (
         <div className='container mx-auto'>
-            <div className='grid  grid-cols-4 gap-4'>
-                <div className='my-5'>
+            <div className='flex flex-wrap justify-between'>
+                <div className='my-5 w-full  lg:w-[25%]'>
                     <LeftSideNav></LeftSideNav>
                 </div>
-                <div className='col-span-3'>
-                   <div>
+                <div className='w-full lg:w-[70%]'>
                     <RightSIdeContent></RightSIdeContent>
-                   </div>
                 </div>
             </div>
         </div>

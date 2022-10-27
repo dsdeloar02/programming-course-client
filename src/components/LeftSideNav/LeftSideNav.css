@@ -1,3 +1,8 @@
 .categoryWrapper p{
     color: #fff;
 }
+/* .categoryWrapper{
+    display: flex;
+    flex-direction: column;
+
+} */

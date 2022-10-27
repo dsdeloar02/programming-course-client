@@ -8,8 +8,8 @@ const Banner = () => {
       className="h-[400px] bg-no-reaper flex flex-col justify-center items-center"
       style={{ backgroundImage: `url(${BannerImg})` }}
     >
-      <h1 className="font-extrabold text-5xl py-10" >Are you Ready For Learn ? </h1>
-      <button className="py-3 px-10 bg-slate-900 text-white ">
+      <h1 className="font-extrabold text-2xl md:text-5xl py-10 z-100 text-black" >Are you Ready For Learn ? </h1>
+      <button className="py-2 px-8 md:py-3 md:px-10 bg-slate-900 text-white ">
         <Link to="/topics">Explore Now</Link>
       </button>
     </div>
