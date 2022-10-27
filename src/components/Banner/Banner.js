@@ -10,7 +10,7 @@ const Banner = () => {
     >
       <h1 className="font-extrabold text-2xl md:text-5xl py-10 z-100 text-black" >Are you Ready For Learn ? </h1>
       <button className="py-2 px-8 md:py-3 md:px-10 bg-slate-900 text-white ">
-        <Link to="/topics">Explore Now</Link>
+        <Link to="/course">Explore Now</Link>
       </button>
     </div>
   );

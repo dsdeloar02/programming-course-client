@@ -6,7 +6,7 @@ const LeftSideNav = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect( () =>{
-        fetch('http://localhost:5000/categories')
+        fetch('https://programming-tech.vercel.app/categories')
         .then( res => res.json())
         .then(data => setCategories(data));
     }, [])
@@ -16,7 +16,7 @@ const LeftSideNav = () => {
             <div className='categoryWrapper flex flex-wrap'>
                 {
                     categories.map(category => <p className='my-2 mx-2 py-3 px-3 w-full bg-red-500 inline-block text-white hover:bg-red-700' key={category.id}>
-                        <Link className='inline-block'  to={`/category/${category.id}`}>{category.name}</Link>
+                        <Link className='block'  to={`/category/${category.id}`}>{category.name}</Link>
                     </p>)
                 }
             </div>

@@ -7,7 +7,7 @@ const RightSIdeContent = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/categories")
+    fetch("https://programming-tech.vercel.app/categories")
       .then((res) => res.json())
       .then((data) => setCategories(data));
   }, []);

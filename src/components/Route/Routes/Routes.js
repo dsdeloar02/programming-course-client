@@ -18,22 +18,22 @@ export const routes = createBrowserRouter([
         children:[
             {
                 path : '/',
-                loader : () => fetch('http://localhost:5000/teammembers'),
+                loader : () => fetch('https://programming-tech.vercel.app/teammembers'),
                 element : <Home></Home>
             },
             {
                 path : '/course',
-                loader : () => fetch ('http://localhost:5000/courses'),
+                loader : () => fetch ('https://programming-tech.vercel.app/courses'),
                 element : <Course></Course>
             },
             {
                 path : '/category/:id',
-                loader: ({params}) => fetch(`http://localhost:5000/category/${params.id}`),
+                loader: ({params}) => fetch(`https://programming-tech.vercel.app/category/${params.id}`),
                 element:<Category></Category>
             },
             {
                 path : '/cart/:id',
-                loader : ({params}) => fetch(`http://localhost:5000/cart/${params.id}`),
+                loader : ({params}) => fetch(`https://programming-tech.vercel.app/cart/${params.id}`),
                 element : <PrivateRoutes><Cart></Cart></PrivateRoutes>
             },
             {
